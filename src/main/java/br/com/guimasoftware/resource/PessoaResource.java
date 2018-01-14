@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.guimasoftware.event.RecursoCriadoEvent;
 import br.com.guimasoftware.model.Pessoa;
 import br.com.guimasoftware.repository.PessoaRepository;
+import br.com.guimasoftware.repository.PessoaRepositoryQuery;
 import br.com.guimasoftware.service.PessoaService;
 
 @RestController
@@ -30,6 +31,10 @@ public class PessoaResource {
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
+
+//	@Autowired
+//	private PessoaRepositoryQuery pessoaRepositoryQuery;
+	
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
@@ -74,7 +79,11 @@ public class PessoaResource {
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
 		
-	}
+	}/*@PutMapping("/{codigo}/ativo")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void atualizarPropriedadeAtivo(@PathVariable Long codigo, @RequestBody Boolean ativo) {
+		pessoaService.atualizarPropriedadeAtivo(codigo, ativo);
+	}*/
 	
 	@GetMapping("/{codigo}")
 	public ResponseEntity<?> buscarPeloCodigo(@PathVariable Long codigo) {
@@ -114,6 +123,13 @@ public class PessoaResource {
 	public void atualizarPropriedadeAtivo(@PathVariable Long codigo, @RequestBody Boolean ativo) {
 		pessoaService.atualizarPropriedadeAtivo(codigo, ativo);
 	}
+	
+	/*@PutMapping("/{codigo}/ativo")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void atualizarPropriedadeAtivoQuery(@PathVariable Long codigo, @RequestBody Boolean ativo) {
+		pessoaRepositoryQuery.atualizarAtivo(codigo, ativo);//.atualizarPropriedadeAtivo(codigo, ativo);
+	}*/
+	
 	
 	/*CAMPO Blob, salvar e buScar
 	@PostMapping
