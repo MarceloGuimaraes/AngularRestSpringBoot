@@ -25,6 +25,7 @@ import br.com.guimasoftware.exceptionhandler.BusinessException.BusinessError;
 import br.com.guimasoftware.exceptionhandler.PessoaInexistenteOuInativaException;
 import br.com.guimasoftware.model.Lancamento;
 import br.com.guimasoftware.repository.LancamentoRepository;
+import br.com.guimasoftware.repository.filter.LancamentoFilter;
 import br.com.guimasoftware.service.LancamentoService;
 
 @RestController
@@ -44,9 +45,14 @@ public class LancamentoResource {
 	private MessageSource messageSource;
 	
 	@GetMapping
+	public List<Lancamento> pesquisar(LancamentoFilter lancamentoFilter) {
+		return lancamentoRepository.filtrar(lancamentoFilter);
+	}
+	
+/*	@GetMapping
 	public List<Lancamento> listar() {
 		return lancamentoRepository.findAll();
-	}
+	}*/
 	
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Lancamento> buscarPeloCodigo(@PathVariable Long codigo) {
